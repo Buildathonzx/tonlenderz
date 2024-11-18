@@ -1,3 +1,5 @@
+'use client';
+
 import Image from "next/image";
 import { useEffect } from "react";
 import React from "react";
@@ -14,8 +16,8 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert animate-bounce"
-          src="/next.svg"
-          alt="Next.js logo"
+          src="/custom-logo.svg"
+          alt="Custom logo"
           width={180}
           height={38}
           priority
@@ -23,10 +25,11 @@ export default function Home() {
         <div className="flex flex-wrap justify-center items-center gap-8">
           <div className="card w-80 h-60 bg-white bg-opacity-10 rounded-2xl p-6 shadow-lg transform transition-transform hover:scale-105" data-aos="fade-up">
             <div className="card-header text-2xl font-bold">Assets Diversification</div>
-            <div className="card-content flex justify-center items-center mt-4"></div>
+            <div className="card-content flex justify-center items-center mt-4">
               <div className="bg-gray-700 rounded-full w-40 h-10 flex justify-center items-center">
                 <span className="text-gray-500">**********</span>
               </div>
+            </div>
             <div className="card-footer flex justify-between items-center mt-4">
               <span>Blockchain Investment</span>
               <div className="button bg-white bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer">BTC $260K</div>
@@ -74,41 +77,16 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <div className="flex gap-4 mt-8">
+          <button className="button bg-white bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer" onClick={() => alert('Connect GitHub')}>Connect GitHub</button>
+          <button className="button bg-white bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer" onClick={() => alert('Connect MetaMask')}>Connect MetaMask</button>
+          <button className="button bg-white bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer" onClick={() => alert('Connect Trust Wallet')}>Connect Trust Wallet</button>
+        </div>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          href="https://github.com/Buildathonzx/tonlenderz"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -119,7 +97,7 @@ export default function Home() {
             width={16}
             height={16}
           />
-          Go to nextjs.org →
+          Go to documentation →
         </a>
       </footer>
     </div>
