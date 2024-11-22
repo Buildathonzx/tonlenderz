@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { PropsWithChildren } from "react";
+import ClientLayout from "./ClientLayout";
+import BackgroundLogo from '@/components/BackgroundLogo';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -21,13 +23,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: PropsWithChildren) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <BackgroundLogo />
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

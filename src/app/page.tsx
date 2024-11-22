@@ -12,14 +12,16 @@ import { Container, Box, Typography, Card, CardContent, CardHeader, Button } fro
 import { styled } from '@mui/system';
 
 const StyledCard = styled(Card)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : theme.palette.common.white,
-  opacity: 0.9,
+  background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))',
+  backdropFilter: 'blur(10px)',
+  border: '1px solid rgba(255,255,255,0.18)',
   borderRadius: '16px',
   padding: theme.spacing(3),
-  boxShadow: theme.shadows[5],
-  transition: 'transform 0.3s',
+  boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+  transition: 'all 0.3s ease-in-out',
   '&:hover': {
-    transform: 'scale(1.05)',
+    transform: 'translateY(-10px)',
+    boxShadow: '0 15px 45px 0 rgba(31, 38, 135, 0.5)',
   },
 }));
 
@@ -42,10 +44,10 @@ export default function Home() {
 
   return (
     <ThemeProvider attribute="class">
-      <Box className="relative min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 dark:from-gray-800 dark:via-gray-900 dark:to-black">
+      <Box className="relative min-h-screen bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-purple-700 via-pink-700 to-blue-700 dark:from-gray-900 dark:via-purple-900 dark:to-violet-900">
         <Navbar onConnectWallet={handleConnectWallet} />
         {showOverlay && <ConnectWalletOverlay onWalletConnected={handleWalletConnected} />}
-        <Container>
+        <Container className="animate-fadeIn">
           <Box className="flex flex-col items-center gap-8">
             <Image
               className="dark:invert animate-bounce"
@@ -56,7 +58,7 @@ export default function Home() {
               priority
             />
             <Box className="flex flex-wrap justify-center items-center gap-8">
-              <StyledCard data-aos="fade-up">
+              <StyledCard data-aos="zoom-in-up" data-aos-delay="100">
                 <CardHeader title="Assets Diversification" className="text-2xl font-bold" />
                 <CardContent className="flex justify-center items-center mt-4">
                   <Box className="bg-gray-700 dark:bg-gray-900 rounded-full w-40 h-10 flex justify-center items-center">
@@ -68,13 +70,13 @@ export default function Home() {
                   <Button variant="contained" className="bg-white dark:bg-gray-800 bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer">BTC $260K</Button>
                 </Box>
               </StyledCard>
-              <StyledCard data-aos="fade-up">
+              <StyledCard data-aos="zoom-in-up" data-aos-delay="200">
                 <CardHeader title="DeFi" className="text-2xl font-bold" />
                 <CardContent className="flex justify-center items-center mt-4">
                   <Typography>For Digital Currency</Typography>
                 </CardContent>
               </StyledCard>
-              <StyledCard data-aos="fade-up">
+              <StyledCard data-aos="zoom-in-up" data-aos-delay="300">
                 <CardHeader title="Safe Portfolio Matrix" className="text-2xl font-bold" />
                 <CardContent className="flex justify-center items-center mt-4">
                   <Box className="bg-gray-700 dark:bg-gray-900 rounded-full w-40 h-10 flex justify-center items-center">
@@ -86,7 +88,7 @@ export default function Home() {
                   <Button variant="contained" className="bg-white dark:bg-gray-800 bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer">0x4167...a3q72</Button>
                 </Box>
               </StyledCard>
-              <StyledCard data-aos="fade-up">
+              <StyledCard data-aos="zoom-in-up" data-aos-delay="400">
                 <CardHeader title="What People Say" className="text-2xl font-bold" />
                 <CardContent className="flex justify-between items-center mt-4">
                   <Box>
@@ -99,7 +101,7 @@ export default function Home() {
                   <Button variant="contained" className="bg-white dark:bg-gray-800 bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer">$90K</Button>
                 </CardContent>
               </StyledCard>
-              <StyledCard data-aos="fade-up">
+              <StyledCard data-aos="zoom-in-up" data-aos-delay="500">
                 <CardHeader title="Wow Allocation Blockchain" className="text-2xl font-bold" />
                 <CardContent className="flex justify-between items-center mt-4">
                   <Typography>Token Tracker 24h +7d</Typography>
@@ -110,19 +112,19 @@ export default function Home() {
                 </CardContent>
               </StyledCard>
             </Box>
-            <StyledCard id="about" data-aos="fade-up">
+            <StyledCard id="about" data-aos="zoom-in-up" data-aos-delay="600">
               <CardHeader title="About" className="text-2xl font-bold" />
               <CardContent className="flex justify-center items-center mt-4">
                 <Typography>Information about the company.</Typography>
               </CardContent>
             </StyledCard>
-            <StyledCard id="faq" data-aos="fade-up">
+            <StyledCard id="faq" data-aos="zoom-in-up" data-aos-delay="700">
               <CardHeader title="FAQ" className="text-2xl font-bold" />
               <CardContent className="flex justify-center items-center mt-4">
                 <Typography>Frequently Asked Questions.</Typography>
               </CardContent>
             </StyledCard>
-            <StyledCard id="transparency" data-aos="fade-up">
+            <StyledCard id="transparency" data-aos="zoom-in-up" data-aos-delay="800">
               <CardHeader title="Transparency" className="text-2xl font-bold" />
               <CardContent className="flex justify-center items-center mt-4">
                 <Typography>Transparency details.</Typography>
