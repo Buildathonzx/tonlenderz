@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import RootClientWrapper from '@/components/RootClientWrapper';
 
 export const metadata: Metadata = {
   title: 'tonlenderz',
@@ -13,11 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <RootClientWrapper>
-          {children}
-        </RootClientWrapper>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

@@ -1,36 +1,30 @@
 'use client';
 
-import React, { Suspense, lazy } from 'react';
-
-// Lazy load the TonConnectUIProvider
-const TonConnectUIProvider = lazy(() => 
-  import('@tonconnect/ui-react')
-    .then(module => ({ default: module.TonConnectUIProvider }))
-);
-
-const manifestUrl = '/tonconnect-manifest.json';
-
-function LoadingFallback() {
-  return <div>Loading TON Connect...</div>;
-}
-
-function ErrorBoundary({ children }: { children: React.ReactNode }) {
-  try {
-    return <>{children}</>;
-  } catch (error) {
-    console.error('TON Connect Error:', error);
-    return <div>Failed to load TON Connect. Please refresh the page.</div>;
-  }
-}
+import React from 'react';
+import dynamic from 'next/dynamic';
 
 export default function TonProviderWrapper({ children }: { children: React.ReactNode }) {
+  const [Provider, setProvider] = React.useState<any>(null);
+
+  React.useEffect(() => {
+    const loadProvider = async () => {
+      try {
+        const module = await import('@tonconnect/ui-react');
+        setProvider(() => module.TonConnectUIProvider);
+      } catch (error) {
+        console.error('Failed to load TON Connect:', error);
+      }
+    };
+    loadProvider();
+  }, []);
+
+  if (!Provider) {
+    return <div>Loading TON Connect...</div>;
+  }
+
   return (
-    <ErrorBoundary>
-      <Suspense fallback={<LoadingFallback />}>
-        <TonConnectUIProvider manifestUrl={manifestUrl}>
-          {children}
-        </TonConnectUIProvider>
-      </Suspense>
-    </ErrorBoundary>
+    <Provider manifestUrl="/tonconnect-manifest.json">
+      {children}
+    </Provider>
   );
 }
