@@ -126,8 +126,8 @@ export const darkTheme = createTheme({
       paper: 'rgba(18, 18, 18, 0.75)',
     },
     text: {
-      primary: '#ffffff',
-      secondary: '#b3b3b3',
+      primary: '#ffffff', // Set primary text color to white
+      secondary: '#ffffff', // Set secondary text color to white
     },
   },
   components: {
@@ -138,6 +138,21 @@ export const darkTheme = createTheme({
           backgroundColor: 'rgba(18, 18, 18, 0.75)',
           backdropFilter: 'blur(10px)',
           border: '1px solid rgba(255, 255, 255, 0.1)',
+          color: '#ffffff',
+        },
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: '#ffffff',
+        },
+      },
+    },
+    MuiIcon: {
+      styleOverrides: {
+        root: {
+          color: '#ffffff',
         },
       },
     },

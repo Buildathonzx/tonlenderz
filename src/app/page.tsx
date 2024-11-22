@@ -39,7 +39,7 @@ export default function Home() {
           : 'linear-gradient(135deg, rgba(232, 245, 233, 0.95) 0%, rgba(255, 243, 224, 0.95) 100%)',
         position: 'relative',
         overflow: 'hidden',
-        color: theme.palette.text.primary
+        color: currentTheme === 'dark' ? '#ffffff' : '#1a1a1a'
       }}>
         <Navbar />
         <Box sx={{ pt: 8 }}> {/* Spacing for fixed navbar */}
@@ -112,7 +112,12 @@ export default function Home() {
                             ? '0 4px 30px rgba(0, 0, 0, 0.5)'
                             : '0 4px 30px rgba(0, 0, 0, 0.1)',
                           minWidth: '200px',
-                          color: theme.palette.text.primary
+                          color: theme.palette.text.primary,
+                          display: 'flex',
+                          flexDirection: 'column',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          textAlign: 'center'
                         }}
                       >
                         <Typography variant="h6">{crypto.name}</Typography>
@@ -155,7 +160,18 @@ export default function Home() {
                         ? '0 4px 30px rgba(0, 0, 0, 0.5)'
                         : '0 4px 30px rgba(0, 0, 0, 0.1)',
                       transition: 'all 0.3s ease',
-                      color: theme.palette.text.primary
+                      color: currentTheme === 'dark' ? '#ffffff' : '#1a1a1a',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      textAlign: 'center',
+                      '& .MuiTypography-root': {
+                        color: 'inherit'
+                      },
+                      '& .MuiSvgIcon-root': {
+                        color: 'inherit'
+                      }
                     }}
                   >
                     {feature.icon}
@@ -204,7 +220,12 @@ export default function Home() {
                         ? 'rgba(255, 255, 255, 0.1)'
                         : 'rgba(0, 0, 0, 0.1)'
                     }`,
-                    color: theme.palette.text.primary
+                    color: theme.palette.text.primary,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    textAlign: 'center'
                   }}>
                     <Typography variant="body1">
                       TonLenderz is a revolutionary decentralized lending platform built on TON blockchain...
@@ -240,7 +261,12 @@ export default function Home() {
                         ? 'rgba(255, 255, 255, 0.1)'
                         : 'rgba(0, 0, 0, 0.1)'
                     }`,
-                    color: theme.palette.text.primary
+                    color: theme.palette.text.primary,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    textAlign: 'center'
                   }}
                   data-aos="fade-up"
                   data-aos-delay={index * 100}
@@ -260,7 +286,12 @@ export default function Home() {
                 ? 'rgba(28, 28, 28, 0.7)'
                 : 'rgba(255, 255, 255, 0.7)',
               backdropFilter: 'blur(10px)',
-              color: theme.palette.text.primary
+              color: theme.palette.text.primary,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              textAlign: 'center'
             }}>
               <Grid container spacing={4}>
                 <Grid item xs={12} md={4}>

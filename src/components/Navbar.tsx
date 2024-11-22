@@ -1,14 +1,24 @@
 'use client';
 
-import { AppBar, Box, Button, IconButton, Toolbar, Typography, useTheme as useMuiTheme } from '@mui/material';
+import { AppBar, Box, Button, IconButton, Toolbar, Typography, useTheme as useMuiTheme, Drawer, List, ListItem, ListItemText } from '@mui/material';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
-import { Brightness4, Brightness7, AccountBalanceWallet } from '@mui/icons-material';
+import { Brightness4, Brightness7, AccountBalanceWallet, Menu } from '@mui/icons-material';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const muiTheme = useMuiTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleDrawer = (open: boolean) => () => {
+    setDrawerOpen(open);
+  };
+
+  const menuItems = ['Lending', 'Wallet', 'Settings'];
 
   return (
     <AppBar 
@@ -47,18 +57,42 @@ const Navbar = () => {
           </Typography>
         </motion.div>
 
-        <Box sx={{ display: 'flex', gap: 2 }}>
-          {['Lending', 'Wallet', 'Settings'].map((item) => (
-            <Button
-              key={item}
-              component={Link}
-              href={`/${item.toLowerCase()}`}
-              sx={{ color: muiTheme.palette.text.primary }}
-            >
-              {item}
-            </Button>
-          ))}
-        </Box>
+        {isMobile ? (
+          <>
+            <IconButton onClick={toggleDrawer(true)} sx={{ color: muiTheme.palette.text.primary }}>
+              <Menu />
+            </IconButton>
+            <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
+              <Box
+                sx={{ width: 250 }}
+                role="presentation"
+                onClick={toggleDrawer(false)}
+                onKeyDown={toggleDrawer(false)}
+              >
+                <List>
+                  {menuItems.map((item) => (
+                    <ListItem button component={Link} href={`/${item.toLowerCase()}`} key={item}>
+                      <ListItemText primary={item} />
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>
+            </Drawer>
+          </>
+        ) : (
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            {menuItems.map((item) => (
+              <Button
+                key={item}
+                component={Link}
+                href={`/${item.toLowerCase()}`}
+                sx={{ color: muiTheme.palette.text.primary }}
+              >
+                {item}
+              </Button>
+            ))}
+          </Box>
+        )}
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <IconButton onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
