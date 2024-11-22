@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { ThemeProvider } from 'next-themes';
 
 export const metadata: Metadata = {
   title: 'tonlenderz',
@@ -12,7 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -25,6 +25,7 @@
     "@trpc/server": "11.0.0-rc.638",
     "Menu": "link:@mui/icons-material/Menu",
     "aos": "^2.3.4",
+    "framer-motion": "^11.11.17",
     "next": "15.0.3",
     "next-themes": "^0.4.3",
     "react": "19.0.0-rc-66855b96-20241106",

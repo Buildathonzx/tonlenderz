@@ -1,97 +1,80 @@
-import React from 'react';
-import { AppBar, Toolbar, IconButton, Typography, Button, Box } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { useState } from 'react';
-import { usePathname } from 'next/navigation';
+'use client';
 
-interface NavbarProps {
-  onConnectWallet: () => void;
-}
+import { AppBar, Box, Button, IconButton, Toolbar, Typography, useTheme as useMuiTheme } from '@mui/material';
+import { useTheme } from 'next-themes';
+import Link from 'next/link';
+import { Brightness4, Brightness7, AccountBalanceWallet } from '@mui/icons-material';
+import { motion } from 'framer-motion';
 
-const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
-  const [] = useState<null | HTMLElement>(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
-
-
-
-  const isHomePage = pathname === '/';
+const Navbar = () => {
+  const { theme, setTheme } = useTheme();
+  const muiTheme = useMuiTheme();
 
   return (
     <AppBar 
       position="fixed" 
-      sx={{
-        background: 'rgba(255,255,255,0.1)',
+      sx={{ 
+        background: theme === 'dark'
+          ? 'rgba(28, 28, 28, 0.7)'
+          : 'rgba(255, 255, 255, 0.7)',
         backdropFilter: 'blur(10px)',
-        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.2)',
-        margin: '1rem',
-        borderRadius: '1rem',
-        width: 'calc(100% - 2rem)',
+        borderBottom: `1px solid ${
+          theme === 'dark'
+            ? 'rgba(255, 255, 255, 0.1)'
+            : 'rgba(0, 0, 0, 0.1)'
+        }`,
+        boxShadow: theme === 'dark'
+          ? '0 4px 30px rgba(0, 0, 0, 0.5)'
+          : '0 4px 30px rgba(0, 0, 0, 0.1)'
       }}
     >
-      <Toolbar className="flex justify-between items-center">
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          sx={{ display: { sm: 'none' } }}
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          <MenuIcon />
-        </IconButton>
+          <Typography variant="h6" component={Link} href="/" sx={{ 
+            textDecoration: 'none',
+            color: 'inherit',
+            fontWeight: 700,
+            background: 'linear-gradient(45deg, #7928CA, #FF0080)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}>
+            TonLenderz
+          </Typography>
+        </motion.div>
 
-        <Typography 
-          variant="h6" 
-          className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600"
-          sx={{ flexGrow: { xs: 1, sm: 0 } }}
-        >
-          TonLenderz
-        </Typography>
-
-        <Box sx={{ 
-          display: { xs: mobileMenuOpen ? 'flex' : 'none', sm: 'flex' },
-          position: { xs: 'absolute', sm: 'static' },
-          top: { xs: '100%', sm: 'auto' },
-          left: { xs: 0, sm: 'auto' },
-          right: { xs: 0, sm: 'auto' },
-          bgcolor: { xs: 'rgba(31, 38, 135, 0.95)', sm: 'transparent' },
-          color: { xs: 'white', sm: 'inherit' },
-          flexDirection: { xs: 'column', sm: 'row' },
-          gap: 2,
-          p: { xs: 2, sm: 0 },
-          borderRadius: { xs: '0 0 1rem 1rem', sm: 0 },
-          backdropFilter: 'blur(10px)',
-          border: { xs: '1px solid rgba(255, 255, 255, 0.18)', sm: 'none' },
-          zIndex: 1000,
-          '& .MuiButton-root': {
-            width: { xs: '100%', sm: 'auto' },
-            color: { xs: 'white', sm: 'inherit' },
-            '&:hover': {
-              bgcolor: { xs: 'rgba(255, 255, 255, 0.1)', sm: 'transparent' },
-            }
-          }
-        }}>
-          <Button color="inherit" href="/" className="rounded-full">Home</Button>
-          <Button color="inherit" href="/lending" className="rounded-full">Lending</Button>
-          <Button color="inherit" href="/settings" className="rounded-full">Settings</Button>
-          <Button color="inherit" href="/wallet" className="rounded-full">Wallet</Button>
-          {isHomePage && (
-            <>
-              <Button color="inherit" href="#about" className="rounded-full">About</Button>
-              <Button color="inherit" href="#faq" className="rounded-full">FAQ</Button>
-              <Button color="inherit" href="#transparency" className="rounded-full">Transparency</Button>
-            </>
-          )}
+        <Box sx={{ display: 'flex', gap: 2 }}>
+          {['Lending', 'Wallet', 'Settings'].map((item) => (
+            <Button
+              key={item}
+              component={Link}
+              href={`/${item.toLowerCase()}`}
+              sx={{ color: muiTheme.palette.text.primary }}
+            >
+              {item}
+            </Button>
+          ))}
         </Box>
 
-        <Button 
-          color="inherit" 
-          onClick={onConnectWallet}
-          className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-2 rounded-full transition-all duration-300 transform hover:scale-105 ml-4"
-          sx={{ display: { xs: 'none', sm: 'block' } }}
-        >
-          Connect Wallet
-        </Button>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <IconButton onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+            {theme === 'dark' ? <Brightness7 /> : <Brightness4 />}
+          </IconButton>
+          <Button
+            variant="contained"
+            startIcon={<AccountBalanceWallet />}
+            sx={{
+              background: 'linear-gradient(45deg, #7928CA, #FF0080)',
+              borderRadius: '12px'
+            }}
+          >
+            Connect Wallet
+          </Button>
+        </Box>
       </Toolbar>
     </AppBar>
   );
