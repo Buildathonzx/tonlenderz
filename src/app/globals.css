@@ -39,3 +39,18 @@ body {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+@media (max-width: 768px) {
+  .menu-item {
+    padding: 8px 16px;
+  }
+  .dropdown-content {
+    position: static;
+    margin-top: 0;
+    padding: 0;
+    background-color: transparent;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+}

@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import ConnectWalletOverlay from '@/components/ConnectWalletOverlay';
 
 const Wallet = () => {
-  const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const [, setIsWalletConnected] = useState(false);
   const [showOverlay, setShowOverlay] = useState(true);
 
   const handleWalletConnected = () => {

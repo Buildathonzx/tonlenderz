@@ -8,9 +8,23 @@ import "aos/dist/aos.css";
 import { ThemeProvider } from 'next-themes';
 import Navbar from '@/components/Navbar';
 import ConnectWalletOverlay from '@/components/ConnectWalletOverlay';
+import { Container, Box, Typography, Card, CardContent, CardHeader, Button } from '@mui/material';
+import { styled } from '@mui/system';
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : theme.palette.common.white,
+  opacity: 0.9,
+  borderRadius: '16px',
+  padding: theme.spacing(3),
+  boxShadow: theme.shadows[5],
+  transition: 'transform 0.3s',
+  '&:hover': {
+    transform: 'scale(1.05)',
+  },
+}));
 
 export default function Home() {
-  const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const [, setIsWalletConnected] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
 
   const handleConnectWallet = () => {
@@ -28,93 +42,95 @@ export default function Home() {
 
   return (
     <ThemeProvider attribute="class">
-      <div className="relative grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 dark:from-gray-800 dark:via-gray-900 dark:to-black">
+      <Box className="relative min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 dark:from-gray-800 dark:via-gray-900 dark:to-black">
         <Navbar onConnectWallet={handleConnectWallet} />
         {showOverlay && <ConnectWalletOverlay onWalletConnected={handleWalletConnected} />}
-        <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-          <Image
-            className="dark:invert animate-bounce"
-            src="/images/tonlenderz.jpeg"
-            alt="Custom logo"
-            width={180}
-            height={38}
-            priority
-          />
-          <div className="flex flex-wrap justify-center items-center gap-8">
-            <div className="card w-80 h-60 bg-white dark:bg-gray-700 bg-opacity-10 rounded-2xl p-6 shadow-lg transform transition-transform hover:scale-105" data-aos="fade-up">
-              <div className="card-header text-2xl font-bold">Assets Diversification</div>
-              <div className="card-content flex justify-center items-center mt-4">
-                <div className="bg-gray-700 dark:bg-gray-900 rounded-full w-40 h-10 flex justify-center items-center">
-                  <span className="text-gray-500">**********</span>
-                </div>
-              </div>
-              <div className="card-footer flex justify-between items-center mt-4">
-                <span>Blockchain Investment</span>
-                <div className="button bg-white dark:bg-gray-800 bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer">BTC $260K</div>
-              </div>
-            </div>
-            <div className="highlight w-80 h-60 bg-gradient-to-r from-green-400 to-blue-500 dark:from-green-700 dark:to-blue-800 rounded-2xl p-6 shadow-lg transform transition-transform hover:scale-105" data-aos="fade-up">
-              <div className="card-header text-2xl font-bold">DeFi</div>
-              <div className="card-content flex justify-center items-center mt-4">
-                <span>For Digital Currency</span>
-              </div>
-            </div>
-            <div className="card w-80 h-60 bg-white dark:bg-gray-700 bg-opacity-10 rounded-2xl p-6 shadow-lg transform transition-transform hover:scale-105" data-aos="fade-up">
-              <div className="card-header text-2xl font-bold">Safe Portfolio Matrix</div>
-              <div className="card-content flex justify-center items-center mt-4">
-                <div className="bg-gray-700 dark:bg-gray-900 rounded-full w-40 h-10 flex justify-center items-center">
-                  <span className="text-gray-500">**********</span>
-                </div>
-              </div>
-              <div className="card-footer flex justify-between items-center mt-4">
-                <span>Wallet address</span>
-                <div className="button bg-white dark:bg-gray-800 bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer">0x4167...a3q72</div>
-              </div>
-            </div>
-            <div className="card w-80 h-40 bg-white dark:bg-gray-700 bg-opacity-10 rounded-2xl p-6 shadow-lg transform transition-transform hover:scale-105" data-aos="fade-up">
-              <div className="card-header text-2xl font-bold">What People Say</div>
-              <div className="card-content flex justify-between items-center mt-4">
-                <div>
-                  <span>Sold to over 75m</span>
-                  <div className="flex items-center mt-2">
-                    <i className="fab fa-bitcoin text-green-500"></i>
-                    <span className="ml-2">Marian McDaniel</span>
-                  </div>
-                </div>
-                <div className="button bg-white dark:bg-gray-800 bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer">$90K</div>
-              </div>
-            </div>
-            <div className="highlight w-80 h-40 bg-gradient-to-r from-green-400 to-blue-500 dark:from-green-700 dark:to-blue-800 rounded-2xl p-6 shadow-lg transform transition-transform hover:scale-105" data-aos="fade-up">
-              <div className="card-header text-2xl font-bold">Wow Allocation Blockchain</div>
-              <div className="card-content flex justify-between items-center mt-4">
-                <span>Token Tracker 24h +7d</span>
-                <div className="flex items-center">
-                  <div className="button bg-white dark:bg-gray-800 bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer mr-2">Ton</div>
-                  <div className="button bg-white dark:bg-gray-800 bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer">Wallet</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <section id="about" className="card w-80 h-60 bg-white dark:bg-gray-700 bg-opacity-10 rounded-2xl p-6 shadow-lg transform transition-transform hover:scale-105" data-aos="fade-up">
-            <div className="card-header text-2xl font-bold">About</div>
-            <div className="card-content flex justify-center items-center mt-4">
-              <span>Information about the company.</span>
-            </div>
-          </section>
-          <section id="faq" className="card w-80 h-60 bg-white dark:bg-gray-700 bg-opacity-10 rounded-2xl p-6 shadow-lg transform transition-transform hover:scale-105" data-aos="fade-up">
-            <div className="card-header text-2xl font-bold">FAQ</div>
-            <div className="card-content flex justify-center items-center mt-4">
-              <span>Frequently Asked Questions.</span>
-            </div>
-          </section>
-          <section id="transparency" className="card w-80 h-60 bg-white dark:bg-gray-700 bg-opacity-10 rounded-2xl p-6 shadow-lg transform transition-transform hover:scale-105" data-aos="fade-up">
-            <div className="card-header text-2xl font-bold">Transparency</div>
-            <div className="card-content flex justify-center items-center mt-4">
-              <span>Transparency details.</span>
-            </div>
-          </section>
-        </main>
-        <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+        <Container>
+          <Box className="flex flex-col items-center gap-8">
+            <Image
+              className="dark:invert animate-bounce"
+              src="/images/tonlenderz.jpeg"
+              alt="Custom logo"
+              width={180}
+              height={38}
+              priority
+            />
+            <Box className="flex flex-wrap justify-center items-center gap-8">
+              <StyledCard data-aos="fade-up">
+                <CardHeader title="Assets Diversification" className="text-2xl font-bold" />
+                <CardContent className="flex justify-center items-center mt-4">
+                  <Box className="bg-gray-700 dark:bg-gray-900 rounded-full w-40 h-10 flex justify-center items-center">
+                    <Typography className="text-gray-500">**********</Typography>
+                  </Box>
+                </CardContent>
+                <Box className="flex justify-between items-center mt-4">
+                  <Typography>Blockchain Investment</Typography>
+                  <Button variant="contained" className="bg-white dark:bg-gray-800 bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer">BTC $260K</Button>
+                </Box>
+              </StyledCard>
+              <StyledCard data-aos="fade-up">
+                <CardHeader title="DeFi" className="text-2xl font-bold" />
+                <CardContent className="flex justify-center items-center mt-4">
+                  <Typography>For Digital Currency</Typography>
+                </CardContent>
+              </StyledCard>
+              <StyledCard data-aos="fade-up">
+                <CardHeader title="Safe Portfolio Matrix" className="text-2xl font-bold" />
+                <CardContent className="flex justify-center items-center mt-4">
+                  <Box className="bg-gray-700 dark:bg-gray-900 rounded-full w-40 h-10 flex justify-center items-center">
+                    <Typography className="text-gray-500">**********</Typography>
+                  </Box>
+                </CardContent>
+                <Box className="flex justify-between items-center mt-4">
+                  <Typography>Wallet address</Typography>
+                  <Button variant="contained" className="bg-white dark:bg-gray-800 bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer">0x4167...a3q72</Button>
+                </Box>
+              </StyledCard>
+              <StyledCard data-aos="fade-up">
+                <CardHeader title="What People Say" className="text-2xl font-bold" />
+                <CardContent className="flex justify-between items-center mt-4">
+                  <Box>
+                    <Typography>Sold to over 75m</Typography>
+                    <Box className="flex items-center mt-2">
+                      <i className="fab fa-bitcoin text-green-500"></i>
+                      <Typography className="ml-2">Marian McDaniel</Typography>
+                    </Box>
+                  </Box>
+                  <Button variant="contained" className="bg-white dark:bg-gray-800 bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer">$90K</Button>
+                </CardContent>
+              </StyledCard>
+              <StyledCard data-aos="fade-up">
+                <CardHeader title="Wow Allocation Blockchain" className="text-2xl font-bold" />
+                <CardContent className="flex justify-between items-center mt-4">
+                  <Typography>Token Tracker 24h +7d</Typography>
+                  <Box className="flex items-center">
+                    <Button variant="contained" className="bg-white dark:bg-gray-800 bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer mr-2">Ton</Button>
+                    <Button variant="contained" className="bg-white dark:bg-gray-800 bg-opacity-20 rounded-lg px-4 py-2 cursor-pointer">Wallet</Button>
+                  </Box>
+                </CardContent>
+              </StyledCard>
+            </Box>
+            <StyledCard id="about" data-aos="fade-up">
+              <CardHeader title="About" className="text-2xl font-bold" />
+              <CardContent className="flex justify-center items-center mt-4">
+                <Typography>Information about the company.</Typography>
+              </CardContent>
+            </StyledCard>
+            <StyledCard id="faq" data-aos="fade-up">
+              <CardHeader title="FAQ" className="text-2xl font-bold" />
+              <CardContent className="flex justify-center items-center mt-4">
+                <Typography>Frequently Asked Questions.</Typography>
+              </CardContent>
+            </StyledCard>
+            <StyledCard id="transparency" data-aos="fade-up">
+              <CardHeader title="Transparency" className="text-2xl font-bold" />
+              <CardContent className="flex justify-center items-center mt-4">
+                <Typography>Transparency details.</Typography>
+              </CardContent>
+            </StyledCard>
+          </Box>
+        </Container>
+        <Box className="flex gap-6 flex-wrap items-center justify-center mt-8">
           <a
             className="flex items-center gap-2 hover:underline hover:underline-offset-4"
             href="https://github.com/Buildathonzx/tonlenderz"
@@ -130,8 +146,8 @@ export default function Home() {
             />
             Go to documentation →
           </a>
-        </footer>
-      </div>
+        </Box>
+      </Box>
     </ThemeProvider>
   );
 }
