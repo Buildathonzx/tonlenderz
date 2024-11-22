@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import TonProviderWrapper from '@/components/TonProviderWrapper';
+import RootClientWrapper from '@/components/RootClientWrapper';
 
 export const metadata: Metadata = {
   title: 'tonlenderz',
@@ -14,9 +14,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <TonProviderWrapper>
+        <RootClientWrapper>
           {children}
-        </TonProviderWrapper>
+        </RootClientWrapper>
       </body>
     </html>
   );

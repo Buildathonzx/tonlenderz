@@ -1,6 +1,5 @@
-
 {
-  "url": "https://tonlenderz-app.vercel.app",
+  "url": "/",
   "name": "TonLenderz",
-  "iconUrl": "https://tonlenderz-app.vercel.app/icon.png"
+  "iconUrl": "/icon.png"
 }
