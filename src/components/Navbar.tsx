@@ -8,7 +8,11 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-const Navbar = () => {
+interface NavbarProps {
+  onConnectWallet?: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
   const { theme, setTheme } = useTheme();
   const muiTheme = useMuiTheme();
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
@@ -101,6 +105,7 @@ const Navbar = () => {
           <Button
             variant="contained"
             startIcon={<AccountBalanceWallet />}
+            onClick={onConnectWallet}
             sx={{
               background: 'linear-gradient(45deg, #7928CA, #FF0080)',
               borderRadius: '12px'

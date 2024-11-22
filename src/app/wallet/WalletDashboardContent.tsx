@@ -23,10 +23,12 @@ interface Asset {
 const WalletDashboardContent = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [connected, setConnected] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   const [tonConnect, setTonConnect] = useState<any>(null);
   const { address, balance, assets } = useWallet();
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let ui: any;
     const init = async () => {
       const TonUI = await import('@tonconnect/ui-react');
