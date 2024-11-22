@@ -19,7 +19,9 @@ const WalletDashboard = () => {
   if (!isConnected) {
     return (
       <Box className="flex flex-col min-h-screen">
-        <Navbar />
+        <Navbar onConnectWallet={function (): void {
+          throw new Error('Function not implemented.');
+        } } />
         <Box className="flex-grow flex items-center justify-center">
           <Card className="p-8 text-center">
             <Typography variant="h5" className="mb-4">Connect your wallet to continue</Typography>
@@ -33,7 +35,9 @@ const WalletDashboard = () => {
 
   return (
     <Box className="flex flex-col min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-900 dark:to-purple-900">
-      <Navbar />
+      <Navbar onConnectWallet={function (): void {
+        throw new Error('Function not implemented.');
+      } } />
       <Box className="container mx-auto px-4 py-8 flex-grow">
         {isLoading ? (
           <Box className="flex justify-center items-center h-full">
