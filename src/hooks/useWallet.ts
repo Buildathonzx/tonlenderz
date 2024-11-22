@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import  useTonConnect  from '@tonconnect/ui-react';
+import { useTonConnectUI } from '@tonconnect/ui-react';
 import { walletService } from '@/utils/contracts';
 
 interface Asset {
@@ -10,7 +10,9 @@ interface Asset {
 }
 
 export const useWallet = () => {
-  const { connected, account } = useTonConnect();
+  const [tonConnectUI] = useTonConnectUI();
+  const connected = tonConnectUI.connected;
+  const account = tonConnectUI.account;
   const [balance, setBalance] = useState('0');
   const [assets, setAssets] = useState<Asset[]>([]); // properly typed assets state
 

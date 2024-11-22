@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Box, Card, Typography, Button, Grid, CircularProgress } from '@mui/material';
-import { TonConnectButton, useTonConnect } from '@tonconnect/ui-react';
+import { TonConnectButton, useTonConnectUI } from '@tonconnect/ui-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useWallet } from '@/hooks/useWallet';
@@ -15,7 +15,8 @@ interface Asset {
 }
 
 const WalletDashboard = () => {
-  const { connected } = useTonConnect();
+  const [tonConnectUI] = useTonConnectUI();
+  const connected = tonConnectUI.connected;
   const { address, balance, assets } = useWallet();
   const [isLoading, setIsLoading] = useState(true);
 
