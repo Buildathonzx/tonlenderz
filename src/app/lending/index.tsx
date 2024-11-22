@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { ThemeProvider } from 'next-themes';
+import ConnectWalletOverlay from '../../components/ConnectWalletOverlay';
 
 const Lending = () => {
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(true);
+
+  const handleWalletConnected = () => {
+    setIsWalletConnected(true);
+    setShowOverlay(false);
+  };
+
   return (
     <ThemeProvider attribute="class">
       <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900">
-        <Navbar />
+        <Navbar onConnectWallet={() => setShowOverlay(true)} />
+        {showOverlay && <ConnectWalletOverlay onWalletConnected={handleWalletConnected} />}
         <main className="container mx-auto px-4 py-8 flex-grow">
           <h1 className="text-2xl font-bold text-primary-500 dark:text-primary-300">Lending Dashboard</h1>
           <p className="mt-4 text-gray-700 dark:text-gray-300">Manage your digital assets here.</p>

@@ -1,20 +1,36 @@
 'use client';
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { ThemeProvider } from 'next-themes';
+import Navbar from '@/components/Navbar';
+import ConnectWalletOverlay from '@/components/ConnectWalletOverlay';
 
 export default function Home() {
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
+
+  const handleConnectWallet = () => {
+    setShowOverlay(true);
+  };
+
+  const handleWalletConnected = () => {
+    setIsWalletConnected(true);
+    setShowOverlay(false);
+  };
+
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
 
   return (
     <ThemeProvider attribute="class">
-      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 dark:from-gray-800 dark:via-gray-900 dark:to-black">
+      <div className="relative grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 dark:from-gray-800 dark:via-gray-900 dark:to-black">
+        <Navbar onConnectWallet={handleConnectWallet} />
+        {showOverlay && <ConnectWalletOverlay onWalletConnected={handleWalletConnected} />}
         <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
           <Image
             className="dark:invert animate-bounce"
@@ -79,6 +95,24 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <section id="about" className="card w-80 h-60 bg-white dark:bg-gray-700 bg-opacity-10 rounded-2xl p-6 shadow-lg transform transition-transform hover:scale-105" data-aos="fade-up">
+            <div className="card-header text-2xl font-bold">About</div>
+            <div className="card-content flex justify-center items-center mt-4">
+              <span>Information about the company.</span>
+            </div>
+          </section>
+          <section id="faq" className="card w-80 h-60 bg-white dark:bg-gray-700 bg-opacity-10 rounded-2xl p-6 shadow-lg transform transition-transform hover:scale-105" data-aos="fade-up">
+            <div className="card-header text-2xl font-bold">FAQ</div>
+            <div className="card-content flex justify-center items-center mt-4">
+              <span>Frequently Asked Questions.</span>
+            </div>
+          </section>
+          <section id="transparency" className="card w-80 h-60 bg-white dark:bg-gray-700 bg-opacity-10 rounded-2xl p-6 shadow-lg transform transition-transform hover:scale-105" data-aos="fade-up">
+            <div className="card-header text-2xl font-bold">Transparency</div>
+            <div className="card-content flex justify-center items-center mt-4">
+              <span>Transparency details.</span>
+            </div>
+          </section>
         </main>
         <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
           <a
