@@ -1,36 +1,34 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import ClientLayout from "./ClientLayout";
-import BackgroundLogo from '@/components/BackgroundLogo';
+import { Metadata } from 'next';
+import { TonConnectUIProvider } from '@tonconnect/ui-react';
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
+// Metadata can be exported from server component
 export const metadata: Metadata = {
-  title: "tonlenderz",
-  description: "tonlenderz",
+  title: 'tonlenderz',
+  description: 'tonlenderz',
 };
 
+// Separate client component for TonConnect provider
+'use client';
+function Providers({ children }: { children: React.ReactNode }) {
+  const manifestUrl = 'https://your-app-domain.com/tonconnect-manifest.json';
+  
+  return (
+    <TonConnectUIProvider manifestUrl={manifestUrl}>
+      {children}
+    </TonConnectUIProvider>
+  );
+}
+
+// Root layout component
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <BackgroundLogo />
-        <ClientLayout>{children}</ClientLayout>
+    <html lang="en">
+      <body>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

@@ -2,13 +2,21 @@
 
 import React, { useState, useEffect } from 'react';
 import { Box, Card, Typography, Button, Grid, CircularProgress } from '@mui/material';
-import { TonConnectButton } from '@tonconnect/ui-react';
+import { TonConnectButton, useTonConnect } from '@tonconnect/ui-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useWallet } from '@/hooks/useWallet';
 
+interface Asset {
+  name: string;
+  balance: string;
+  symbol: string;
+  value: number;
+}
+
 const WalletDashboard = () => {
-  const { isConnected, address, balance, assets } = useWallet();
+  const { connected } = useTonConnect();
+  const { address, balance, assets } = useWallet();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -16,12 +24,10 @@ const WalletDashboard = () => {
     setTimeout(() => setIsLoading(false), 1000);
   }, []);
 
-  if (!isConnected) {
+  if (!connected) {
     return (
       <Box className="flex flex-col min-h-screen">
-        <Navbar onConnectWallet={function (): void {
-          throw new Error('Function not implemented.');
-        } } />
+        <Navbar onConnectWallet={() => {}} />
         <Box className="flex-grow flex items-center justify-center">
           <Card className="p-8 text-center">
             <Typography variant="h5" className="mb-4">Connect your wallet to continue</Typography>
@@ -63,7 +69,7 @@ const WalletDashboard = () => {
               <Card className="p-6 bg-white/10 backdrop-blur-lg">
                 <Typography variant="h6" className="text-gray-400">Assets Portfolio</Typography>
                 <Grid container spacing={2} className="mt-4">
-                  {assets.map((asset, index) => (
+                  {assets.map((asset: Asset, index) => (
                     <Grid item xs={12} sm={6} md={4} key={index}>
                       <Card className="p-4">
                         <Typography>{asset.name}</Typography>
